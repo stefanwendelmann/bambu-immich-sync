@@ -68,3 +68,33 @@ jobs:
           pull: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
+      - name: Update Docker Hub repository overview
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          DOCKERHUB_REPOSITORY: stefanwendelmann/bambu-immich-sync
+        run: |
+          set -euo pipefail
+          token_response=$(curl --fail --silent --show-error \
+            --request POST \
+            --header 'Content-Type: application/json' \
+            --data "$(jq -n \
+              --arg identifier "$DOCKERHUB_USERNAME" \
+              --arg secret "$DOCKERHUB_TOKEN" \
+              '{identifier: $identifier, secret: $secret}')" \
+            https://hub.docker.com/v2/auth/token)
+          token=$(jq -er '.access_token' <<<"$token_response")
+          echo "::add-mask::$token"
+
+          full_description=$(jq -Rs . < README.md)
+          payload=$(jq -n \
+            --arg description 'Automatically sync completed Bambu Lab timelapses to Immich.' \
+            --argjson full_description "$full_description" \
+            '{description: $description, full_description: $full_description}')
+          curl --fail --silent --show-error --output /dev/null \
+            --request PATCH \
+            --header "Authorization: Bearer $token" \
+            --header 'Content-Type: application/json' \
+            --data "$payload" \
+            "https://hub.docker.com/v2/repositories/$DOCKERHUB_REPOSITORY"
+          echo 'Docker Hub repository overview updated from README.md.'

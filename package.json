@@ -1,0 +1,13 @@
+{
+  "name": "bambu-immich-sync",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Sync finished Bambu Lab timelapse videos to Immich",
+  "scripts": {
+    "test": "node --test",
+    "check": "npm test"
+  },
+  "dependencies": {"basic-ftp": "^5.0.5"},
+  "engines": {"node": ">=22"}
+}

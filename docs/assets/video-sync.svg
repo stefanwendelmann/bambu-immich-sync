@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Video-Synchronisierung</title>
+  <desc id="desc">Ein Video wird durch zwei umlaufende Pfeile synchronisiert.</desc>
+  <defs>
+    <linearGradient id="sync" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00ae42"/>
+      <stop offset="1" stop-color="#1789e8"/>
+    </linearGradient>
+  </defs>
+  <path d="M37 54a53 53 0 0 1 88-16" fill="none" stroke="url(#sync)" stroke-linecap="round" stroke-width="9"/>
+  <path d="m120 24 10 16-19 1" fill="none" stroke="#00ae42" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+  <path d="M123 106a53 53 0 0 1-88 16" fill="none" stroke="url(#sync)" stroke-linecap="round" stroke-width="9"/>
+  <path d="m40 136-10-16 19-1" fill="none" stroke="#1789e8" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+  <rect x="48" y="58" width="64" height="46" rx="8" fill="#17212b"/>
+  <path d="m73 69 22 12-22 13z" fill="#fff"/>
+</svg>
